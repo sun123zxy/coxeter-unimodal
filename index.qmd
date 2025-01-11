@@ -26,7 +26,7 @@ The following definitions are applicable to both settings:
 
 - A word is a sequence of letters of finite length. Indices start from $1$. When working in $G$, we always requires words of $G$ to be of reduced form.
 
-- A subword of a word $w$ is a (reduced) word obtained by taking a subsequence of $w$ (i.e. deleting no or several letters in $w$). Let $w_{s..t}$ denotes the subword of $w$ obtained by truncating $w$ from index $s$ to index $t$.
+- A subword of a word $w$ is a (reduced) word obtained by taking a subsequence of $w$ (i.e. deleting none or several letters in $w$). Let $w_{s..t}$ denotes the subword of $w$ obtained by truncating $w$ from index $s$ to index $t$.
 
 ## Generating functions derived by recurrence
 
@@ -63,4 +63,4 @@ $$
 
 ## Computation
 
-Note that the code computes the coefficents of $S_n(z)$ modulo $998244353$.
+Note that the code computes the coefficents of $S_n(z)$ modulo $998244353$. The Alphabet are fixed to $\Sigma := \{ \mathtt{a},\mathtt{b},\dots,\mathtt{z} \}$.

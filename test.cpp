@@ -382,7 +382,6 @@ void entry(){
         SMP[c]=SM[pre];
         SM[c]=Poly{1,1}*SM[pre]-Poly{0,1}*t;
         pre=c;
-
         print(SG[pre]);
         print_unimodality(SG[pre]);
         print(SM[pre]);
