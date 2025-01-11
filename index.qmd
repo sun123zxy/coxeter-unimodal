@@ -1,0 +1,66 @@
+---
+title: "coxeter-unimodal"
+date: "2025/01/11"
+bibliography: index.bib
+lang: en
+
+number-sections: true
+
+format:
+  html:
+    other-links:
+      - text: code
+        href: test.cpp
+  pdf: default
+---
+
+We work in the following two settings:
+  
+- The free monoid $M$ over an alphabet $\Sigma$.
+
+- The group $G$ defined by the presentation $\left\langle \Sigma \mid a^2 = 1,\, \forall a \in \Sigma \right\rangle$, where $\Sigma$ is the alphabet.
+
+The following definitions are applicable to both settings:
+
+- A letter is an element of the alphabet $\Sigma$. The empty word (the identity) is denoted by $\varepsilon$.
+
+- A word is a sequence of letters of finite length. Indices start from $1$. When working in $G$, we always requires words of $G$ to be of reduced form.
+
+- A subword of a word $w$ is a (reduced) word obtained by taking a subsequence of $w$ (i.e. deleting no or several letters in $w$). Let $w_{s..t}$ denotes the subword of $w$ obtained by truncating $w$ from index $s$ to index $t$.
+
+## Generating functions derived by recurrence
+
+From now on let $w$ be a fixed word of length $N$.
+
+- Let $\mathrm{last}_n$ denote the index of the last occurrence of the letter $w_n$ in the word $w_{1..n}$. If there is no $w_n$ in $w_{1..n}$, set $\mathrm{last}_n := 0$.
+
+- Let $f_{n,k}$ denote the number of the distint subsequences of length $k$ of $w_{1..n}$.
+
+- Define the generating function $S_n(z) := \sum_{k=0}^{+\infty} f_{n,k} z^k$.
+
+We compute $S_n(z)$ explicitly by recurrence.
+
+### In the group $G$
+
+$$
+\begin{aligned}
+S_0(z) &= 1 & n &= 0 \\
+S_n(z) &= S_{n-1}(z) + z \left(S_{n-1}(z) - S_{\mathrm{last}_n}(z) \right) \\
+       &= (1+z) S_{n-1}(z) - z S_{\mathrm{last}_n}(z) & n &\geq 1
+\end{aligned}
+$$
+
+### In the monoid $M$
+
+$$
+\begin{aligned}
+S_{-1}(z) &= 0 & n &= -1 \\
+S_0(z) &= 1 & n &= 0 \\
+S_n(z) &= S_{n-1}(z) + z \left(S_{n-1}(z) - S_{\mathrm{last}_n - 1}(z) \right) \\
+       &= (1+z) S_{n-1}(z) - z S_{\mathrm{last}_n - 1}(z) & n &\geq 1
+\end{aligned}
+$$
+
+## Computation
+
+Note that the code computes the coefficents of $S_n(z)$ modulo $998244353$.

@@ -327,10 +327,6 @@ class Matrix : public vector<MI>{public:
     }
 };
 
-const ll CHN=30;
-string str;
-Poly S[CHN];
-
 void print(Poly& P){
     for(ll n=0;n<P.len();n++){
         cout<<P[n]<<"\t";
@@ -359,30 +355,46 @@ bool is_unimodal(Poly& P){
         }
     } return true;
 }
-void entry_distinct_subseq_unique(){
-    cout<<"Input a word here: ";
+void print_unimodality(Poly& P){
+    if(is_log_concave(P)) cout<<"log-concave"<<"; ";
+    if(is_unimodal(P)) cout<<"unimodal"<<"; ";
+    else cout<<"NOT UNIMODAL"<<"!";
+    cout<<'\n';
+}
+
+const ll CHN=30;
+string str;
+Poly SG[CHN],SM[CHN],SMP[CHN];
+void entry(){
+    cout<<"Input a word here (e.g. \"abca\")\n";
     cin>>str;
     ll N=str.length();
-    S[0]=Poly{1}; for(ll i=1;i<=26;i++) S[i]=Poly{0};
+    SG[0]=Poly{1}; for(ll i=1;i<=26;i++) SG[i]=Poly{0};
+    SM[0]=Poly{1}; for(ll i=1;i<=26;i++) SM[i]=Poly{0};
+                   for(ll i=0;i<=26;i++) SMP[i]=Poly{0};
     ll pre=0;
     for(ll n=0;n<N;n++){
         cout<<"Step "<<n<<":\n";
+        
         ll c=str[n]-'a'+1;
-        S[c]=Poly{1,1}*S[pre]-Poly{0,1}*S[c];
+        SG[c]=Poly{1,1}*SG[pre]-Poly{0,1}*SG[c];
+        Poly t=SMP[c];
+        SMP[c]=SM[pre];
+        SM[c]=Poly{1,1}*SM[pre]-Poly{0,1}*t;
         pre=c;
-        print(S[pre]);
-        if(is_log_concave(S[pre])) cout<<"log-concave"<<"; ";
-        if(is_unimodal(S[pre])) cout<<"unimodal"<<"; ";
-        else cout<<"NOT UNIMODAL"<<"!";
+
+        print(SG[pre]);
+        print_unimodality(SG[pre]);
+        print(SM[pre]);
+        print_unimodality(SM[pre]);
         cout<<"\n";
     }
-    print_poly(S[pre]);
 }
 int main(){
     //freopen("t1.in","r",stdin);
     //freopen("t1.out","w",stdout);
     //ll T=rd(); while(T--){
-        entry_distinct_subseq_unique();
+        entry();
     //}
     return 0;
 }
