@@ -63,4 +63,4 @@ $$
 
 ## Computation
 
-Note that the code computes the coefficents of $S_n(z)$ modulo $998244353$. The Alphabet are fixed to $\Sigma := \{ \mathtt{a},\mathtt{b},\dots,\mathtt{z} \}$.
+Note that the code computes the coefficents of $S_n(z)$ modulo $998244353$. The alphabet is fixed to $\Sigma := \{ \mathtt{a},\mathtt{b},\dots,\mathtt{z} \}$.
